@@ -2,7 +2,6 @@ package com.young.dev.youtubeclone.controller;
 
 import com.young.dev.youtubeclone.service.VideoService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
