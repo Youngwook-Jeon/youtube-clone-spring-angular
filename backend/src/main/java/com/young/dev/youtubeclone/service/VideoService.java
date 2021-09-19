@@ -1,5 +1,6 @@
 package com.young.dev.youtubeclone.service;
 
+import com.young.dev.youtubeclone.dto.VideoDto;
 import com.young.dev.youtubeclone.model.Video;
 import com.young.dev.youtubeclone.repository.VideoRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,5 +19,20 @@ public class VideoService {
         video.setVideoUrl(videoUrl);
 
         videoRepository.save(video);
+    }
+
+    public VideoDto editVideo(VideoDto videoDto) {
+        Video savedVideo = videoRepository.findById(videoDto.getId())
+                .orElseThrow(
+                        () -> new IllegalArgumentException("Cannot find video by id: " + videoDto.getId())
+                );
+        savedVideo.setTitle(videoDto.getTitle());
+        savedVideo.setDescription(videoDto.getDescription());
+        savedVideo.setTags(videoDto.getTags());
+        savedVideo.setThumbnailUrl(videoDto.getThumbnailUrl());
+        savedVideo.setVideoStatus(videoDto.getVideoStatus());
+
+        videoRepository.save(savedVideo);
+        return videoDto;
     }
 }
