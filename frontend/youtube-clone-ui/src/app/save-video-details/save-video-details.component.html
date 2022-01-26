@@ -59,15 +59,16 @@
         </label>
       </div>
       <hr>
-      <button type="submit" mat-raised-button color="primary" (click)="saveVideo()">Save</button>
+<!--      <button type="submit" mat-raised-button color="primary" (click)="saveVideo()">Save</button>-->
     </form>
   </div>
   <div fxFlex="30%">
-    <app-video-player *ngIf="videoUrlAvailable" [videoUrl]="videoUrl"></app-video-player>
-    <div *ngIf="showVideoUrl">
-      <h1>You can now view the video at - </h1>
-      <a href="">http://localhost:4200/video/{{videoId}}</a>
-    </div>
+    <app-video-player [videoUrl]="videoUrl"></app-video-player>
+<!--    <app-video-player *ngIf="videoUrlAvailable" [videoUrl]="videoUrl"></app-video-player>-->
+<!--    <div *ngIf="showVideoUrl">-->
+<!--      <h1>You can now view the video at - </h1>-->
+<!--      <a href="">http://localhost:4200/video/{{videoId}}</a>-->
+<!--    </div>-->
   </div>
   <div fxFlex="20%"></div>
 </div>
