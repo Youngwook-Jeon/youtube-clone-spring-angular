@@ -33,11 +33,14 @@ export class SaveVideoDetailsComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
               private videoService: VideoService,
               private matSnackBar: MatSnackBar) {
-    this.videoId = this.activatedRoute.snapshot.params.videoId;
+    // this.videoId = this.activatedRoute.snapshot.params.videoId;
+    this.videoId = this.activatedRoute.snapshot.params["videoId"];
     this.videoService.getVideo(this.videoId).subscribe(data => {
       this.videoUrl = data.videoUrl;
       this.thumbnailUrl = data.thumbnailUrl;
+      console.log(this.thumbnailUrl);
     });
+
     this.saveVideoDetailsForm = new FormGroup({
       title: this.title,
       description: this.description,
@@ -52,7 +55,7 @@ export class SaveVideoDetailsComponent implements OnInit {
     const input = event.input;
     const value = (event.value || '').trim();
 
-    // Add our fruit
+    // Add our tag
     if (value) {
       this.tags.push(value);
     }
