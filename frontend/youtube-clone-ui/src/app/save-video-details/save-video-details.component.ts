@@ -38,7 +38,6 @@ export class SaveVideoDetailsComponent implements OnInit {
     this.videoService.getVideo(this.videoId).subscribe(data => {
       this.videoUrl = data.videoUrl;
       this.thumbnailUrl = data.thumbnailUrl;
-      console.log(this.thumbnailUrl);
     });
 
     this.saveVideoDetailsForm = new FormGroup({
