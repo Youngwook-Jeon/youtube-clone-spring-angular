@@ -15,6 +15,7 @@ public class User {
 
     @Id
     private String id;
+    private String sub;
     private String firstName;
     private String lastName;
     private String fullName;
