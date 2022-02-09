@@ -13,6 +13,7 @@ public class VideoService {
 
     private final S3Service s3Service;
     private final VideoRepository videoRepository;
+    private final UserService userService;
 
     public UploadVideoResponse uploadVideo(MultipartFile multipartFile) {
         String videoUrl = s3Service.uploadFile(multipartFile);
@@ -60,6 +61,37 @@ public class VideoService {
         videoDto.setDescription(savedVideo.getDescription());
         videoDto.setTags(savedVideo.getTags());
         videoDto.setVideoStatus(savedVideo.getVideoStatus());
+
+        return videoDto;
+    }
+
+    public VideoDto likeVideo(String videoId) {
+        Video videoById = getVideoById(videoId);
+        if (userService.ifLikedVideo(videoId)) {
+            videoById.decrementLikes();
+            userService.removeFromLikedVideos(videoId);
+        } else if (userService.ifDisLikedVideo(videoId)) {
+            videoById.decrementDisLikes();
+            userService.removeFromDisLikedVideos(videoId);
+            videoById.incrementLikes();
+            userService.addToLikedVideos(videoId);
+        } else {
+            videoById.incrementLikes();
+            userService.addToLikedVideos(videoId);
+        }
+
+        videoRepository.save(videoById);
+
+        VideoDto videoDto = new VideoDto();
+        videoDto.setVideoUrl(videoById.getVideoUrl());
+        videoDto.setThumbnailUrl(videoById.getThumbnailUrl());
+        videoDto.setId(videoById.getId());
+        videoDto.setTitle(videoById.getTitle());
+        videoDto.setDescription(videoById.getDescription());
+        videoDto.setTags(videoById.getTags());
+        videoDto.setVideoStatus(videoById.getVideoStatus());
+        videoDto.setLikeCount(videoById.getLikes().get());
+        videoDto.setDislikeCount(videoById.getDisLikes().get());
 
         return videoDto;
     }
