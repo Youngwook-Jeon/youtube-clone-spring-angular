@@ -1,11 +1,14 @@
 package com.young.dev.youtubeclone.controller;
 
+import com.young.dev.youtubeclone.dto.CommentDto;
 import com.young.dev.youtubeclone.dto.UploadVideoResponse;
 import com.young.dev.youtubeclone.dto.VideoDto;
 import com.young.dev.youtubeclone.service.VideoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
@@ -52,5 +55,23 @@ public class VideoController {
     @ResponseStatus(OK)
     public VideoDto disLikeVideo(@PathVariable String videoId) {
         return videoService.disLikeVideo(videoId);
+    }
+
+    @PostMapping("/{videoId}/comment")
+    @ResponseStatus(OK)
+    public void addComment(@PathVariable String videoId, @RequestBody CommentDto commentDto) {
+        videoService.addComment(videoId, commentDto);
+    }
+
+    @GetMapping("/{videoId}/comment")
+    @ResponseStatus(OK)
+    public List<CommentDto> getAllComments(@PathVariable String videoId) {
+        return videoService.getAllComments(videoId);
+    }
+
+    @GetMapping
+    @ResponseStatus(OK)
+    public List<VideoDto> getAllVideos() {
+        return videoService.getAllVideos();
     }
 }
