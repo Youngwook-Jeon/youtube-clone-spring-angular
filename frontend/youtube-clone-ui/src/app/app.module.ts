@@ -33,6 +33,8 @@ import { HistoryComponent } from './history/history.component';
 import { SubscriptionsComponent } from './subscriptions/subscriptions.component';
 import { LikedVideosComponent } from './liked-videos/liked-videos.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatListModule} from "@angular/material/list";
 
 @NgModule({
   declarations: [
@@ -71,6 +73,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     VgBufferingModule,
     MatSnackBarModule,
     AuthConfigModule,
+    MatSidenavModule,
+    MatListModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
