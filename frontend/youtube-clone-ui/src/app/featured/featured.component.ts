@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {VideoService} from "../video.service";
+import {VideoDto} from "../video-dto";
 
 @Component({
   selector: 'app-featured',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FeaturedComponent implements OnInit {
 
-  constructor() { }
+  featuredVideos: Array<VideoDto> = [];
+
+  constructor(private videoService: VideoService) { }
 
   ngOnInit(): void {
+    this.videoService.getAllVideos().subscribe(response => {
+      this.featuredVideos = response;
+    });
   }
 
 }
