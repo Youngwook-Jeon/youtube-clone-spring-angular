@@ -36,4 +36,17 @@ export class VideoDetailComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  likeVideo() {
+    this.videoService.likeVideo(this.videoId).subscribe(data => {
+      this.likeCount = data.likeCount;
+      this.dislikeCount = data.dislikeCount;
+    })
+  }
+
+  disLikeVideo() {
+    this.videoService.disLikeVideo(this.videoId).subscribe(data => {
+      this.likeCount = data.likeCount;
+      this.dislikeCount = data.dislikeCount;
+    })
+  }
 }
